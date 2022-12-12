@@ -1,0 +1,8 @@
+<p> <!--- Paragraphe avec un template tag pour générer le nom Learning Log et le lien de l'URL défini ds learnin_logs/urls.py avec le nom 'index' --->
+	<a href="{% url 'learning_logs:index' %}">Learning Log</a> - 
+	<a href="{% url 'learning_logs:topics' %}">Topics</a> 
+</p>
+
+{% block content %}{% endblock content %} <!--- Le template enfant définira l'information contenu dans ce blog de tags --->
+
+

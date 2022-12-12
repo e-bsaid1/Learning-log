@@ -1,0 +1,16 @@
+{% extends "learning_logs/base.html" %}
+
+{% block content %}
+	<p>Add a new topic:</p>
+
+	<form action="{% url 'learning_logs:new_topic' %}" method='post'> <!--- action : argument disant au navigateur où envoyer les données soumis dans le formulaire, ici dans la fonction vue new_topic() --->
+		{% csrf_token %} <!--- Préviens toute attaque malveillante tentant un accès non autorisé au serveur --->
+		{{ form.as_p }} <!--- Affiche les éléments du formulaire en format paragraphe --->
+		<button name="submit">Add topic</button> <!--- Crée un boutton "soumettre" --->
+	</form>
+
+{% endblock content %}
+
+
+		
+
