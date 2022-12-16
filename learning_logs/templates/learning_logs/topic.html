@@ -14,6 +14,9 @@
 		<li>
 			<p>{{ entry.date_added|date:'M d, Y H:1' }}</p> <!--- Horodatage des entrées au format Mois jour, Année heure ---> 
 			<p>{{ entry.text|linebreaks }}</p> <!--- Affichage des textes des entrées avec des sauts de lignes compris par les navigateurs web --->
+			<p>
+				<a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a>
+			</p><!-- Incorporation du lien éditer après chaque date de création d'entrée et son texte -->
 		</li>
 	{% empty %}<!--- affiche un message informant l'utilisateur qu'il n'y a pas d'entrées faits--->
 			<li>There are no entries for this topic yet.</li>

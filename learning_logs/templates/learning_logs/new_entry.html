@@ -2,7 +2,7 @@
 
 {% block content %}
 
-	<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p> <!-- Montre le topic au sommet de la page pour que l'utilisateur puisse voir à quels topics ils ajoutent des entrées -->
+	<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p> <!-- Montre le topic au sommet de la page pour que l'utilisateur puisse voir à quels topics ils ajoutent des entrées. Agit également comme un lien. -->
 
 	<p>Add a new entry:</p>
 	<form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'><!-- Associe la nouvelle entrée avec le topic correspondant par la fonction vue -->

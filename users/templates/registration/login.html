@@ -1,0 +1,22 @@
+{% extends "learning_logs/base.html" %} <!-- Garanti que la page d'authentification aura la même apparence et cohérence que le reste du site -->
+
+{% block content %}
+	<!-- Si l'attribut errors du formulaire est activé, afficher un message d'erreur --> 
+	{% if form.errors %}
+		<p>Your username and password didn't match. Please try again.</p>
+	{% endif %}
+
+	<!-- Fait traiter le formulaire par la vue login, qui l'envoie à ce template -->
+	<form method="post" action="{% url 'users:login' %}">
+		{% csrf_token %}
+		<!--Affche le formulaire-->
+		{{ form.as_p }}
+
+		<!--Ajoute un bouton "Se connecter"-->
+		<button name="sumbit">Log in</button>
+			<!--Django redirige l'utilisateur après s'être identifié correctement-->
+		<input type ="hidden" name="next"
+			value="{% url 'learning_logs:index' %}" />
+	</form>
+
+{% endblock content %}

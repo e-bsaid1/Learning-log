@@ -1,6 +1,16 @@
 <p> <!--- Paragraphe avec un template tag pour générer le nom Learning Log et le lien de l'URL défini ds learnin_logs/urls.py avec le nom 'index' --->
 	<a href="{% url 'learning_logs:index' %}">Learning Log</a> - 
 	<a href="{% url 'learning_logs:topics' %}">Topics</a> 
+	
+	<!--Affiche un message aux utilisateurs connectés actuellement--> 
+	{% if user.is_authenticated %}
+		Hello, {{ user.username}}.
+		<!--Affiche un lien pour se déconnecter-->
+		<a href="{% url 'users:logout' %}">Log out</a>
+	{% else %}
+		<!--Affiche un lien menant à la page login pour les utilisateurs non identifiés-->
+		<a href="{% url 'users:login' %}">Log in</a>
+	{% endif %}
 </p>
 
 {% block content %}{% endblock content %} <!--- Le template enfant définira l'information contenu dans ce blog de tags --->

@@ -12,7 +12,7 @@ envoie les données au navigateur en utilisant une template
 
 from django.shortcuts import render, redirect 
 
-from .models import Topic #Importation du model Topic dans models.py
+from .models import Topic, Entry #Importation des models Topic et Entry de models.py
 from .forms import TopicForm, EntryForm #Importation des formulaires Topic et Entry de forms.py
 
 def index(request):
@@ -70,3 +70,26 @@ def new_entry(request, topic_id):
 	context = {'topic':topic, 'form': form}
 	return render(request, 'learning_logs/new_entry.html', context)
 
+
+def edit_entry(request, entry_id):
+	"""Edit an existing entry."""
+	entry = Entry.objects.get(id=entry_id) #Affectaion de l'entrée-objet que l'utilisateur veut éditer 
+	topic = entry.topic #Affectation du topic associé avec ette entrée 
+
+	if request.method != 'POST':
+		#Initial request; pre-fill form with the current entry. 
+		form = EntryForm(instance=entry) #Crée le formulaire pré-rempli avec les informations tiré de entry
+
+	else:
+		#POST data submitted; process data. 
+		form = EntryForm(instance=entry, data=request.POST) #Crée un formulaire basé sur les informations associé avec entry
+															#mis à jour avec n'importe quelle donnée pertinente partant de request.POST 
+		if form.is_valid(): 
+			# Si le formulaire est valide, sauvegarder et rediriger vers la page HTML topic, l'entrée mis à jour
+			form.save() 
+			return redirect('learning_logs:topic', topic_id=topic.id)
+
+	context = {'entry': entry, 'topic': topic, 'form': form}
+	return render(request, 'learning_logs/edit_entry.html', context)
+
+	
