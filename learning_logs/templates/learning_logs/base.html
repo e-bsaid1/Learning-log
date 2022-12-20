@@ -8,7 +8,8 @@
 		<!--Affiche un lien pour se déconnecter-->
 		<a href="{% url 'users:logout' %}">Log out</a>
 	{% else %}
-		<!--Affiche un lien menant à la page login pour les utilisateurs non identifiés-->
+		<!--pour les utilisateurs non identifiés : Affiche un lien menant à la page login et la page d'inscription -->
+		<a href="{% url 'users:register' %}">Register</a> - 
 		<a href="{% url 'users:login' %}">Log in</a>
 	{% endif %}
 </p>
