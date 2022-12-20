@@ -1,5 +1,9 @@
 from django.db import models
 
+#importation du modèle User à partir de django.contrib.auth
+from django.contrib.auth.models import User
+
+
 # Create your models here.
 # Model = class
 
@@ -8,7 +12,8 @@ class Topic(models.Model):#Which inherit from Model, parent class included in Dj
 	"""A topic the user is learning about"""
 	text = models.CharField(max_length=200)#Piece of data made of characters with a limit 
 	date_added = models.DateTimeField(auto_now_add=True)#Piece of data which record
-														#date and time													
+														#date and time
+	owner = models.ForeignKey(User, on_delete=models.CASCADE)#Champ propriétaire, correspondant au pseudo de l'utilisateur postant le topic													
 	def __str__(self):#Attribute used by default when there is information about a topic
 		"""Return a string representation of the model."""
 		return self.text
@@ -18,6 +23,7 @@ class Entry(models.Model):
 	topic = models.ForeignKey(Topic, on_delete = models.CASCADE)#Connect to each entry to a specific topic
 	text = models.TextField()
 	date_added = models.DateTimeField(auto_now_add=True)#Present entries in chronological order
+	
 
 	class Meta:#Holds extra information for managing a model
 		verbose_name_plural = 'entries'
