@@ -1,27 +1,36 @@
 {% extends 'learning_logs/base.html' %}
 
+{% block page_header %}
+<h3>{{ topic }}</h3><!--- Montre la rêquete topic inclus dans le dictionnaire context --->
+{% endblock page_header %}
+
 {% block content %}
-
-	<p>Topic: {{ topic }}</p> <!--- Montre la rêquete topic inclus dans le dictionnaire context --->
-
-	<p>Entries:</p>
 	<p>
 		<a href="{% url 'learning_logs:new_entry' topic.id %}">Add new entry</a>
 	</p><!-- Ajout d'un lien à la page new_entry sur chaque page de topic-->
 
-	<ul>
+	
 	{% for entry in entries %}
-		<li>
-			<p>{{ entry.date_added|date:'M d, Y H:1' }}</p> <!--- Horodatage des entrées au format Mois jour, Année heure ---> 
-			<p>{{ entry.text|linebreaks }}</p> <!--- Affichage des textes des entrées avec des sauts de lignes compris par les navigateurs web --->
-			<p>
-				<a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a>
+		<!-- card : permet d'utiliser des styles prédéfinis, flexibles parfait pour afficher les entrées d'un topic. 
+			Il a 2 éléments imbriqués : un pour tenir l'horodatage/lien pour éditer l'entrée, l'autre pour tenir le corps de l'entrée -->
+		<div class="card mb-3">
+			<h4 class="card-header">
+				{{ entry.date_added|date:'M d, Y H:1' }} <!--- Horodatage des entrées au format Mois jour, Année heure ---> 
+				<!-- small : tag qui fait apparaitre le lien "édition" plus petit que l'horodatage-->
+				<small><a href="{% url 'learning_logs:edit_entry' entry.id %}">Edit entry</a></small>
+			</h4>
+			<!-- Place le texte de l'entrée dans une boite simple -->
+			<div class="card-body">
+				{{ entry.text|linebreaks }}
+			</div>
+		</div>
+
 			</p><!-- Incorporation du lien éditer après chaque date de création d'entrée et son texte -->
 		</li>
 	{% empty %}<!--- affiche un message informant l'utilisateur qu'il n'y a pas d'entrées faits--->
 			<li>There are no entries for this topic yet.</li>
 	{% endfor %}
-	</ul>
+
 
 {% endblock content %}
 

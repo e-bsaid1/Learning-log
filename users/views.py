@@ -3,7 +3,6 @@ from django.contrib.auth import login #import° de la fonction login(), qui conn
 from django.contrib.auth.forms import UserCreationForm #permet de créer un nouvel utilisateur pour utiliser l'appli web 
 
 # Create your views here.
-
 def register(request):
 	"""Register a new user."""
 	if request.method != 'POST':

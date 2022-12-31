@@ -1,19 +1,21 @@
 {% extends 'learning_logs/base.html' %}<!--- Hérite des données de la base.xhtml---> 
 
+{% block page_header %}
+	<!-- Entête stylisant Topics-->	
+	<h1>Topics</h1>
+{% endblock page_header %}
+
 {% block content %}
-
-	<p>Topics</p>
-
 	<ul> <!--- Liste désordonnée --->
 		{% for topic in topics %} 
-	    	<li>
+	    	<!-- Stylisation d'entête de taille 3 -->
+	    	<li><h3>
 	    		<a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
-	    	</li> <!--- Deux accolades pour print le texte du topic --->
+	    	</h3></li> <!--- Deux accolades pour print le texte du topic --->
 	 		{% empty %} <!--- Pas d'item dans la liste = avertissement --->
-	    	<li>No topics ave been added yet.<li>
+	    	<li><h3>No topics ave been added yet.</h3></li>
 	  	{% endfor %}
 	</ul>
 
-	<a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a>
-
+	<h3><a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a></h3>
 {% endblock content %}

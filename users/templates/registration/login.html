@@ -1,20 +1,27 @@
 {% extends "learning_logs/base.html" %} <!-- Garanti que la page d'authentification aura la même apparence et cohérence que le reste du site -->
 
+<!-- Chargement du template de bootstrap4 -->
+{% load bootstrap4 %}
+
+{% block page_header %}
+	<h2>Log in to your account.</h2>
+{% endblock page_header %}
+
 {% block content %}
-	<!-- Si l'attribut errors du formulaire est activé, afficher un message d'erreur --> 
-	{% if form.errors %}
-		<p>Your username and password didn't match. Please try again.</p>
-	{% endif %}
+	<!-- Fait traiter le formulaire par la vue login, qui l'envoie à ce template 
+	- Bootstrap4 reconnait automatquement les erreurs.
+	- Ajout d'une classe form -->
+	<form method="post" action="{% url 'users:login' %}" class="form">
 
-	<!-- Fait traiter le formulaire par la vue login, qui l'envoie à ce template -->
-	<form method="post" action="{% url 'users:login' %}">
 		{% csrf_token %}
+		<!-- insertion des règles stylistiques de Bootstrap dans les éléments individuelles des formulaires --> 
+		{% bootstrap_form form %}
+		<!-- Stylisation des bouttons par Bootstrap -->
+		{% buttons %}
 		<!--Affche le formulaire-->
-		{{ form.as_p }}
+			<button name="submit" class="btn btn-primary">Log in</button>
+		{% endbuttons %}
 
-		<!--Ajoute un bouton "Se connecter"-->
-		<button name="sumbit">Log in</button>
-			<!--Django redirige l'utilisateur après s'être identifié correctement-->
 		<input type ="hidden" name="next"
 			value="{% url 'learning_logs:index' %}" />
 	</form>
