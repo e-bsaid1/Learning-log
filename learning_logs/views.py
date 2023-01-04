@@ -17,6 +17,8 @@ from .models import Topic, Entry #Importation des models Topic et Entry de model
 from .forms import TopicForm, EntryForm #Importation des formulaires Topic et Entry de forms.py
 from django.http import Http404 # Importation de l'exception HTTP404, erreur standar qui est retourné quand une ressource demandé n'existe pas ds un serveur 
 
+
+
 def index(request):
 	"""The home page for Learning Log."""
 	return render(request, 'learning_logs/index.html') #rend la réponse inspiré des données fournis par les vues

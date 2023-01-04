@@ -1,17 +1,25 @@
 {% extends "learning_logs/base.html" %}
+<!-- Charger le template bootstrap4 dans la page html -->
+{% load bootstrap4 %}
+
+<!-- Dit à l'utilisateur la fonction de la page -->
+{% block page_header %}
+	<h2>Add a new entry.</h2>
+{% endblock page_header %}
+
+
 
 {% block content %}
-
-	<p><a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a></p> <!-- Montre le topic au sommet de la page pour que l'utilisateur puisse voir à quels topics ils ajoutent des entrées. Agit également comme un lien. -->
-
-	<p>Add a new entry:</p>
-	<form action="{% url 'learning_logs:new_entry' topic.id %}" method='post'><!-- Associe la nouvelle entrée avec le topic correspondant par la fonction vue -->
+	
+	<form method="post" action="{% url 'learning_logs:new_entry' topic.id %}" class="form"><!-- Associe la nouvelle entrée avec le topic correspondant par la fonction vue -->
 		{% csrf_token %}
-		{{ form.as_p }}
-		<button name='submit'>Add entry</button>
+		{% bootstrap_form form %} <!--- Affiche les éléments du formulaire en format paragraphe avec les règles stylistiques de la template bootstrap4 --->
+		{% buttons %}
+			<button name="submit" class="btn btn-primary">Add entry</button> <!--- Crée un boutton "soumettre" --->
+		{% endbuttons %}
 	</form>
 
-	{% endblock content %}
+{% endblock content %}
 
 
 

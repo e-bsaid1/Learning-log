@@ -1,15 +1,21 @@
 {% extends "learning_logs/base.html" %}
+<!-- Charger le template bootstrap4 dans la page html -->
+{% load bootstrap4 %}
+
+<!-- Dit à l'utilisateur la fonction de la page -->
+{% block page_header %}
+	<h2>Edit the entry.</h2>
+{% endblock page_header %}
 
 {% block content %}
 
-	<p><a href="{% url 'learning_logs:topic' topic.id %}"> {{ topic }}</a></p> 
-
-	<p>Edit entry:</p>
-
-	<form action="{% url 'learning_logs:edit_entry' entry.id %}" method='post'> <!-- argument action : envoie le formulaire à la fonction edit_entry pour son traitement -->
+	<form method='post' action="{% url 'learning_logs:edit_entry' entry.id %}" class="form"> <!-- argument action : envoie le formulaire à la fonction edit_entry pour son traitement -->
 		{% csrf_token %}
-		{{ form.as_p }}
-		<button name="submit">Save changes</button> <!-- Sauvegarde de l'édit -->
+		{% bootstrap_form form %} <!--- Affiche les éléments du formulaire en format paragraphe avec les règles stylistiques de la template bootstrap4 --->
+		{% buttons %}
+			<button name="submit" class="btn btn-primary">Save changes</button> <!-- Sauvegarde de l'édit -->
+		{% endbuttons %}
+		
 	</form>
 
 {% endblock content %} 

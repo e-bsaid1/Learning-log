@@ -1,13 +1,17 @@
 {% extends "learning_logs/base.html" %}
+<!-- Charger le template bootstrap4 dans la page html -->
+{% load bootstrap4 %}
 
 {% block content %}
 
-	<form method="post" action="{% url 'users:register' %}">
+	<form method="post" action="{% url 'users:register' %}" class="form">
 		{% csrf_token %}
 		<!-- Django affiche tous les champs dans le formulaire correctement, avec messures d'erreurs si le forum n'est pas rempli correctement -->
-		{{ form.as_p }} 
+		{% bootstrap_form form %} <!--- Affiche les éléments du formulaire en format paragraphe avec les règles stylistiques de la template bootstrap4 --->
+		{% buttons %}
+			<button name="submit" class="btn btn-primary">Register</button> <!-- Sauvegarde du compte -->
+		{% endbuttons %}
 
-		<button name="submit">Register</button>
 		<!-- Redirige l'utilisateur vers la page d'acceuil intex -->
 		<input type="hidden" name="next" value="{% url 'learning_logs:index' %}" />
 	</form>
