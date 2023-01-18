@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-62c*v220$f^w3a7%&qa@h68!u98nt6s(jaqb5gh3_q^5ydr62s
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','.vercel.app', '.now.sh']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -141,4 +141,39 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = 'users:login' 
 
+# Plateform.sh settings. 
 
+# Détermine les configurations sur le serveur à distance 
+from platformshconfig import Config
+
+config = Config()
+
+# Si la méthode est vraie, nous pouvons modifier les configurations utilisées 
+# sur le serveur Platform.sh 
+if config.is_valid_platform():
+    # Permet au projet d'être servi par fin d'hôte sur .platformsh.site
+    # Tous les projets déployé pour des utilisations gratuites seront servi
+    # en utilisant cet host 
+    ALLOWED_HOSTS.append('.platformsh.site')
+
+    if config.appDir:
+        # Si les configs sont en train d'être chargé sur le directory de l'appli déployé, 
+        # régler STATIC_ROOT pour que les fichiers statiques soient servis correctement 
+        STATIC_ROOT = Path(config.appDir) / 'static'
+    if config.projectEntropy:
+        # Règle un SECRET_KEY plus sécurisé sur le serveur à distance 
+        SECRET_KEY = config.projectEntropy
+
+    if not config.in_build():
+        # Configuration de la production de la base de données 
+        db_settings = config.credentials('database')
+        DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.postgresql',
+                'NAME': db_settings['path'],
+                'USER': db_settings['username'],
+                'PASSWORD': db_settings['password'],
+                'HOST': db_settings['host'],
+                'PORT': db_settings['port'],
+            },
+        }

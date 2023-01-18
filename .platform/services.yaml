@@ -1,0 +1,6 @@
+# Chaque service listé sera déployé dans son propre conteur comme part de 
+# notre projet Plateform.sh
+
+db:
+  type: postgresql: 12
+  disk: 1024
