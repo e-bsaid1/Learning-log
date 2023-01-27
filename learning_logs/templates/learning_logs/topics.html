@@ -2,7 +2,7 @@
 
 {% block page_header %}
 	<!-- Entête stylisant Topics-->	
-	<h1>Topics</h1>
+	<h1>Sujets</h1>
 {% endblock page_header %}
 
 {% block content %}
@@ -13,9 +13,9 @@
 	    		<a href="{% url 'learning_logs:topic' topic.id %}">{{ topic }}</a>
 	    	</h3></li> <!--- Deux accolades pour print le texte du topic --->
 	 		{% empty %} <!--- Pas d'item dans la liste = avertissement --->
-	    	<li><h3>No topics ave been added yet.</h3></li>
+	    	<li><h3>Aucun sujet n'a encore été ajouté.</h3></li>
 	  	{% endfor %}
 	</ul>
 
-	<h3><a href="{% url 'learning_logs:new_topic' %}">Add a new topic</a></h3>
+	<h3><a href="{% url 'learning_logs:new_topic' %}">Ajouter un nouveau sujet</a></h3>
 {% endblock content %}

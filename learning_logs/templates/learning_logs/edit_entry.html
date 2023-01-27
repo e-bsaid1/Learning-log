@@ -4,7 +4,7 @@
 
 <!-- Dit à l'utilisateur la fonction de la page -->
 {% block page_header %}
-	<h2>Edit the entry.</h2>
+	<h2>Modifiez l'entrée.</h2>
 {% endblock page_header %}
 
 {% block content %}
@@ -13,7 +13,7 @@
 		{% csrf_token %}
 		{% bootstrap_form form %} <!--- Affiche les éléments du formulaire en format paragraphe avec les règles stylistiques de la template bootstrap4 --->
 		{% buttons %}
-			<button name="submit" class="btn btn-primary">Save changes</button> <!-- Sauvegarde de l'édit -->
+			<button name="submit" class="btn btn-primary">Sauvegarder les changements.</button> <!-- Sauvegarde de l'édit -->
 		{% endbuttons %}
 		
 	</form>

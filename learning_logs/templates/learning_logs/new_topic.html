@@ -4,7 +4,7 @@
 
 <!-- Dit à l'utilisateur la fonction de la page -->
 {% block page_header %}
-	<h2>Add a new topic.</h2>
+	<h2>Ajouter un nouveau sujet.</h2>
 {% endblock page_header %}
 
 {% block content %}
@@ -12,7 +12,7 @@
 		{% csrf_token %} <!--- Préviens toute attaque malveillante tentant un accès non autorisé au serveur --->
 		{% bootstrap_form form %} <!--- Affiche les éléments du formulaire en format paragraphe avec les règles stylistiques de la template bootstrap4 --->
 		{% buttons %}
-			<button name="submit" class="btn btn-primary">Add topic</button> <!--- Crée un boutton "soumettre" --->
+			<button name="submit" class="btn btn-primary">Ajouter un sujet</button> <!--- Crée un boutton "soumettre" --->
 		{% endbuttons %}
 	</form>
 

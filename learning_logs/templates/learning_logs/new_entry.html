@@ -4,7 +4,7 @@
 
 <!-- Dit à l'utilisateur la fonction de la page -->
 {% block page_header %}
-	<h2>Add a new entry.</h2>
+	<h2>Ajouter une nouvelle entrée.</h2>
 {% endblock page_header %}
 
 
@@ -15,7 +15,7 @@
 		{% csrf_token %}
 		{% bootstrap_form form %} <!--- Affiche les éléments du formulaire en format paragraphe avec les règles stylistiques de la template bootstrap4 --->
 		{% buttons %}
-			<button name="submit" class="btn btn-primary">Add entry</button> <!--- Crée un boutton "soumettre" --->
+			<button name="submit" class="btn btn-primary">Ajouter une entrée</button> <!--- Crée un boutton "soumettre" --->
 		{% endbuttons %}
 	</form>
 
